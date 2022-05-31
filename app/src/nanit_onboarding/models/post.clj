@@ -22,9 +22,16 @@
      created-post)))
 
 (defn count*
-  ([]
-   (:post :count (-> (select :%count.*)
-                                 (from table-name)
-                                 sql/format
-                                 db/execute-one!
-                                 :count))))
+  []
+  (:post :count (-> (select :%count.*)
+                    (from table-name)
+                    sql/format
+                    db/execute-one!
+                    :count)))
+
+(defn select-all
+  []
+  (-> (from table-name)
+      (select :*)
+      sql/format
+      db/execute!))

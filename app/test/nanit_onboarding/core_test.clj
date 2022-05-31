@@ -9,3 +9,7 @@
     (post/create {:title "welcome" :content "text"})
     (testing "should create new post"
       (is (= (inc count) (post/count*))))))
+
+(deftest select-all
+  (let [first-post (first (post/select-all))]
+    (is (number? (:id first-post)))))
