@@ -1,7 +1,6 @@
 (ns nanit-onboarding.models.post
-  (:require [honeysql-postgres.helpers :refer [returning]]
-            [honeysql.core :as sql]
-            [honeysql.helpers :refer [from insert-into limit order-by select values]]
+  (:require [honey.sql :as sql]
+            [honey.sql.helpers :refer [returning from insert-into select values]]
             [nanit-onboarding.db.core :as db]
             ))
 

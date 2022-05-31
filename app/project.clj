@@ -10,8 +10,7 @@
                  [ring/ring-json "0.5.0"]
                  [ring/ring-mock "0.4.0"]
                  [org.clojure/data.json "0.2.7"]
-                 [honeysql "0.9.8"]
-                 [nilenso/honeysql-postgres "0.2.6"]
+                 [com.github.seancorfield/honeysql "2.2.891"]
                  [com.github.seancorfield/next.jdbc "1.2.780"]
                  [org.postgresql/postgresql "42.1.3"]]
   :main ^:skip-aot nanit-onboarding.core
