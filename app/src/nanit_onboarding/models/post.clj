@@ -1,6 +1,6 @@
 (ns nanit-onboarding.models.post
   (:require [honey.sql :as sql]
-            [honey.sql.helpers :refer [returning from insert-into select values]]
+            [honey.sql.helpers :refer [returning from insert-into select values where]]
             [nanit-onboarding.db.core :as db]
             ))
 
@@ -23,11 +23,11 @@
 
 (defn count*
   []
-  (:post :count (-> (select :%count.*)
-                    (from table-name)
-                    sql/format
-                    db/execute-one!
-                    :count)))
+  (-> (select :%count.*)
+      (from table-name)
+      sql/format
+      db/execute-one!
+      :count))
 
 (defn select-all
   []
@@ -35,3 +35,16 @@
       (select :*)
       sql/format
       db/execute!))
+
+(defn upvote [id]
+  (let [parsed-id (Integer. id)]
+    (when-let [post (-> (select :*)
+                        (from table-name)
+                        (where [:= :id parsed-id])
+                        sql/format
+                        db/execute-one!)]
+      (-> (honey.sql.helpers/update table-name)
+          (honey.sql.helpers/set {:upvotes (inc (:upvotes post))})
+          (where [:= :id parsed-id])
+          sql/format
+          db/execute-one!))))

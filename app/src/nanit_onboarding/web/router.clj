@@ -22,6 +22,11 @@
              {:status  200
               :headers {"Content-Type" "application/json"}
               :body    (post/select-all)}
+             )
+           (POST "/posts/upvote/:id" [id]
+             {:status  200
+              :headers {"Content-Type" "application/json"}
+              :body    (and (post/upvote id) "success")}
              ))
 
 (def app
