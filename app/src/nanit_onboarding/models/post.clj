@@ -48,3 +48,11 @@
           (where [:= :id parsed-id])
           sql/format
           db/execute-one!))))
+
+(defn update* [id content]
+  (when content (-> (honey.sql.helpers/update table-name)
+                    (honey.sql.helpers/set {:content content})
+                    (where [:= :id (Integer. id)])
+                    sql/format
+                    db/execute-one!))
+  )

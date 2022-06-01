@@ -1,5 +1,5 @@
 (ns nanit-onboarding.web.router
-    (:require [compojure.core :refer [defroutes GET POST]]
+    (:require [compojure.core :refer [defroutes GET POST PUT]]
               [nanit-onboarding.models.post :as post]
       [ring.middleware
        [json :refer [wrap-json-params wrap-json-response]]
@@ -27,6 +27,11 @@
              {:status  200
               :headers {"Content-Type" "application/json"}
               :body    (and (post/upvote id) "success")}
+             )
+           (PUT "/posts/:id" [id content]
+             {:status  200
+              :headers {"Content-Type" "application/json"}
+              :body    (and (post/update* id content) "success")}
              ))
 
 (def app
