@@ -1,7 +1,12 @@
 version: '3.1'
 
 services:
-
+  app:
+    build: app/.
+    ports:
+      - 8080:3000
+    env_file:
+      - ./envfile.ci
   db:
     build: postgres/.
     restart: always
@@ -12,4 +17,4 @@ services:
       - POSTGRES_PASSWORD=example
       - POSTGRES_DB=db1
     ports:
-      - 5432:5432
+      - 5433:5432

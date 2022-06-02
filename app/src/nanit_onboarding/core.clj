@@ -5,5 +5,5 @@
 
 (defn -main
       [& args]
-      (run-server app {:port 8080}))
+      (run-server app {:port 3000}))
 
